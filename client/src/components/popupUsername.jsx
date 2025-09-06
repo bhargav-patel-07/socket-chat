@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import logo from "../assets/logo.png";
+
 
 const PopupUsername = ({ onJoin }) => {
   const [username, setUsername] = useState('');
@@ -14,7 +16,12 @@ const PopupUsername = ({ onJoin }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-container">
-        <h2><img src="" alt="" />Join Chat Room</h2>
+        <div className="logo-container">
+          <img src={logo} alt="Logo" style={{ height: "40px" }} />
+          <h2>
+            Socket Chat         
+          </h2>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
@@ -39,7 +46,8 @@ const PopupUsername = ({ onJoin }) => {
             />
           </div>
           <button type="submit" className="join-button">
-            Join Room
+            <span>Join Chat</span>
+            <span style={{ fontSize: '1.2rem' }}>→</span>
           </button>
         </form>
       </div>
@@ -67,12 +75,18 @@ const PopupUsername = ({ onJoin }) => {
           max-width: 400px;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+          .logo-container {
+          display: flex;
+          align-items: left;
+          gap: 10px;
+          margin-bottom: 1rem;
+          }
 
         .popup-container h2 {
           margin-top: 0;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
           color: #333;
-          text-align: center;
+          text-align: left;
         }
 
         .form-group {
@@ -91,28 +105,33 @@ const PopupUsername = ({ onJoin }) => {
           border: 1px solid #ddd;
           border-radius: 4px;
           font-size: 1rem;
+          
         }
 
-        .join-button {
-          width: 100%;
-          padding: 0.75rem;
-          background-color: #4a90e2;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          cursor: pointer;
-          margin-top: 1rem;
-        }
+       .join-button {
+  width: 50%;
+  padding: 0.75rem 1.5rem;
+  color: white; /* keep text white */
+  background: rgba(0, 0, 0, 0.5); /* black transparent */
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px); /* optional glass effect */
+}
 
-        .join-button:hover {
-          background-color: #357abd;
-        }
+.join-button:disabled {
+  background: rgba(0, 0, 0, 0.2);
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
 
-        .join-button:disabled {
-          background-color: #cccccc;
-          cursor: not-allowed;
-        }
       `}</style>
     </div>
   );
