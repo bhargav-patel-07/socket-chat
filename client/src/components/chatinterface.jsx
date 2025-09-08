@@ -4,30 +4,30 @@ const ChatInterface = ({ socket, user }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const messagesEndRef = useRef(null);
-    
+
     // Auto-scroll to bottom when messages update
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
-  
+
     useEffect(() => {
         const handleMessage = (msg) => {
             setMessages((prev) => [...prev, msg]);
         };
-        
+
         socket.on("message", handleMessage);
-        
+
         return () => {
             socket.off("message", handleMessage);
         };
     }, [socket]);
-  
+
     const sendMessage = (e) => {
         e.preventDefault();
         if (message.trim()) {
-            socket.emit("chatMessage", { 
-                user: user.username, 
-                room: user.roomId, 
+            socket.emit("chatMessage", {
+                user: user.username,
+                room: user.roomId,
                 text: message,
                 timestamp: new Date().toISOString()
             });
@@ -41,9 +41,11 @@ const ChatInterface = ({ socket, user }) => {
             sendMessage(e);
         }
     };
-  
+
     return (
         <div className="chat-container">
+            <Switch isOn={isAIAssistantOn} handleToggle={toggleAIAssistant} />
+
             <div className="chat-header">
                 <h2>#{user.roomId}</h2>
                 <div className="user-info">
@@ -51,7 +53,7 @@ const ChatInterface = ({ socket, user }) => {
                     <span className="status-dot">●</span>
                 </div>
             </div>
-            
+
             <div className="messages-container">
                 {messages.length === 0 ? (
                     <div className="empty-state">
@@ -66,7 +68,7 @@ const ChatInterface = ({ socket, user }) => {
                             <div className="message-content">
                                 <p>{m.text}</p>
                                 <span className="message-time">
-                                    {new Date(m.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                    {new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </span>
                             </div>
                         </div>
@@ -74,7 +76,7 @@ const ChatInterface = ({ socket, user }) => {
                 )}
                 <div ref={messagesEndRef} />
             </div>
-            
+
             <form onSubmit={sendMessage} className="message-input-container">
                 <div className="input-wrapper">
                     <textarea
@@ -86,13 +88,13 @@ const ChatInterface = ({ socket, user }) => {
                     />
                     <button type="submit" disabled={!message.trim()}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
                 </div>
             </form>
-            
+
             <style jsx>{`
                 .chat-container {
                     display: flex;
