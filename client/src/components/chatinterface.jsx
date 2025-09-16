@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Switch from './switch';
 
 const ChatInterface = ({ socket, user }) => {
     const [messages, setMessages] = useState([]);

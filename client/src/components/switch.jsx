@@ -41,7 +41,7 @@ const Switch = ({ isOn, handleToggle }) => {
     const labelStyle = {
       fontSize: '14px',
       color: '#666',
-    
+    }
 
 const Switch = ({ isOn, handleToggle }) => {
   return (
