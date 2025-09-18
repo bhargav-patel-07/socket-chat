@@ -4,7 +4,12 @@ import Switch from './switch';
 const ChatInterface = ({ socket, user }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const [isAIAssistantOn, setIsAIAssistantOn] = useState(false);
     const messagesEndRef = useRef(null);
+    
+    const toggleAIAssistant = () => {
+        setIsAIAssistantOn(prevState => !prevState);
+    };
 
     // Auto-scroll to bottom when messages update
     useEffect(() => {
@@ -30,7 +35,8 @@ const ChatInterface = ({ socket, user }) => {
                 user: user.username,
                 room: user.roomId,
                 text: message,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                aiEnabled: isAIAssistantOn,   
             });
             setMessage("");
         }
@@ -45,7 +51,6 @@ const ChatInterface = ({ socket, user }) => {
 
     return (
         <div className="chat-container">
-            <Switch isOn={isAIAssistantOn} handleToggle={toggleAIAssistant} />
 
             <div className="chat-header">
                 <h2>#{user.roomId}</h2>
@@ -77,8 +82,9 @@ const ChatInterface = ({ socket, user }) => {
                 )}
                 <div ref={messagesEndRef} />
             </div>
-
             <form onSubmit={sendMessage} className="message-input-container">
+            <Switch isOn={isAIAssistantOn} handleToggle={toggleAIAssistant} />
+
                 <div className="input-wrapper">
                     <textarea
                         value={message}

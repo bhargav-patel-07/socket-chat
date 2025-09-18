@@ -1,60 +1,53 @@
-import React, { useState } from 'react';
-const Switch = ({ isOn, handleToggle }) => {
-    const switchContainerStyle = {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      margin: '10px 0',
-    };
-  
-    const switchStyle = {
-      cursor: 'pointer',
-      width: '60px',
-      height: '30px',
-      position: 'relative',
-      display: 'inline-block',
-    };
-  
-    const sliderStyle = {
-      position: 'absolute',
-      cursor: 'pointer',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      transition: '.4s',
-      borderRadius: '34px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '12px',
-      fontWeight: 'bold',
-      color: 'white',
-      backgroundColor: isOn ? '#4CAF50' : '#ccc',
-      transform: isOn ? 'translateX(0)' : 'translateX(30px)',
-    };
-  
-    const switchTextStyle = {
-      userSelect: 'none',
-    };
-  
-    const labelStyle = {
-      fontSize: '14px',
-      color: '#666',
-    }
+import React from 'react';
 
 const Switch = ({ isOn, handleToggle }) => {
   return (
-    <div className="switch-container">
-      <span className="switch-label">AI Assistant</span>
-      <div className="switch" onClick={handleToggle}>
-        <div className={`slider ${isOn ? 'on' : 'off'}`}>
-          <div className="switch-text">{isOn ? 'ON' : 'OFF'}</div>
+    <>
+      <div className="switch-container" onClick={handleToggle}>
+        <span className="switch-label">AI Assistant</span>
+        <div className={`switch ${isOn ? 'on' : ''}`}>
+          <div className="slider"></div>
         </div>
       </div>
-    </div>
+      <style jsx>{`
+        .switch-container {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .switch-label {
+          font-weight: bold;
+          color: #ccc;
+        }
+        .switch {
+          width: 50px;
+          height: 28px;
+          background-color: #ccc;
+          border-radius: 14px;
+          position: relative;
+          transition: background-color 0.3s;
+        }
+        .switch.on {
+          background-color: #4CAF50;
+        }
+        .slider {
+          width: 24px;
+          height: 24px;
+          background-color: white;
+          border-radius: 50%;
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          transition: transform 0.3s;
+        }
+        .switch.on .slider {
+          transform: translateX(22px);
+        }
+      `}</style>
+    </>
   );
-};
-    };
+};   
 
 export default Switch;

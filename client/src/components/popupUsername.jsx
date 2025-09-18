@@ -109,28 +109,28 @@ const PopupUsername = ({ onJoin }) => {
         }
 
        .join-button {
-  width: 50%;
-  padding: 0.75rem 1.5rem;
-  color: white; /* keep text white */
-  background: rgba(0, 0, 0, 0.5); /* black transparent */
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px); /* optional glass effect */
-}
+         width: 50%;
+         padding: 0.75rem 1.5rem;
+         color: white; /* keep text white */
+         background: rgba(0, 0, 0, 0.5); /* black transparent */
+         font-size: 1rem;
+         font-weight: 500;
+         cursor: pointer;
+         margin-top: 1.5rem;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 10px;
+         transition: all 0.3s ease;
+         backdrop-filter: blur(4px); /* optional glass effect */
+        }
 
-.join-button:disabled {
-  background: rgba(0, 0, 0, 0.2);
-  color: #999;
-  cursor: not-allowed;
-  transform: none;
-}
+       .join-button:disabled {
+         background: rgba(0, 0, 0, 0.2);
+         color: #999;
+         cursor: not-allowed;
+         transform: none;
+        }
 
       `}</style>
     </div>
